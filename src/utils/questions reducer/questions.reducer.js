@@ -1,5 +1,7 @@
 import QUESTION_ACTION_TYPE from "./questions.types";
 
+import { SECONDS_PER_QUESTION } from "../constants/numbers_constant";
+
 export const QUESTION_INITAL_STATE = {
   questions: [],
 
@@ -9,6 +11,7 @@ export const QUESTION_INITAL_STATE = {
   answer: null,
   points: 0,
   highscore: 0,
+  secondsRemaining: null,
 };
 
 export const questionReducer = (state = QUESTION_INITAL_STATE, action = {}) => {
@@ -22,7 +25,11 @@ export const questionReducer = (state = QUESTION_INITAL_STATE, action = {}) => {
       return { ...state, status: "error" };
 
     case QUESTION_ACTION_TYPE.ACTIVE:
-      return { ...state, status: "active" };
+      return {
+        ...state,
+        status: "active",
+        secondsRemaining: state.questions.length * SECONDS_PER_QUESTION,
+      };
 
     case QUESTION_ACTION_TYPE.NEW_ANSWER:
       const question = state.questions.at(state.currentQuestion);
@@ -56,6 +63,13 @@ export const questionReducer = (state = QUESTION_INITAL_STATE, action = {}) => {
         questions: state.questions,
         highscore: state.highscore,
         status: "ready",
+      };
+
+    case QUESTION_ACTION_TYPE.TIMER:
+      return {
+        ...state,
+        secondsRemaining: state.secondsRemaining - 1,
+        status: state.secondsRemaining === 0 ? "finished" : state.status,
       };
     default:
       throw new Error();

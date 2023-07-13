@@ -1,4 +1,4 @@
-import { restart } from "../../utils/questions/questions.action";
+import { restart } from "../../utils/questions reducer/questions.action";
 
 const FinishScreen = ({ points, maxPoints, highscore, dispatch }) => {
   const percentage = (points / maxPoints) * 100;

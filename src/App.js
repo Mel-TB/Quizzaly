@@ -9,16 +9,29 @@ import { Question } from "./component/questions/questions.component";
 import { NextButton } from "./component/next button/next_button";
 import { Progress } from "./component/progress/progress";
 import { FinishScreen } from "./component/finish screen/finish_screen.component";
+import { Footer } from "./component/footer/footer.component";
 
 import {
   questionReducer,
   QUESTION_INITAL_STATE,
-} from "./utils/questions/questions.reducer";
-import { dataReceived, dataFailed } from "./utils/questions/questions.action";
+} from "./utils/questions reducer/questions.reducer";
+import {
+  dataReceived,
+  dataFailed,
+} from "./utils/questions reducer/questions.action";
+import { Timer } from "./component/timer/timer.component";
 
 const App = () => {
   const [
-    { questions, status, currentQuestion, answer, points, highscore },
+    {
+      questions,
+      status,
+      currentQuestion,
+      answer,
+      points,
+      highscore,
+      secondsRemaining,
+    },
     dispatch,
   ] = useReducer(questionReducer, QUESTION_INITAL_STATE);
 
@@ -62,14 +75,19 @@ const App = () => {
               dispatch={dispatch}
               answer={answer}
             />
-            <NextButton
-              dispatch={dispatch}
-              answer={answer}
-              numberOfQuestions={numberOfQuestions}
-              currentQuestion={currentQuestion}
-            >
-              Next Question
-            </NextButton>
+
+            <Footer>
+              <Timer
+                dispatch={dispatch}
+                secondsRemaining={secondsRemaining}
+              />
+              <NextButton
+                dispatch={dispatch}
+                answer={answer}
+                numberOfQuestions={numberOfQuestions}
+                currentQuestion={currentQuestion}
+              />
+            </Footer>
           </>
         )}
         {status === "finished" && (

@@ -1,4 +1,4 @@
-import { active } from "../../utils/questions/questions.action";
+import { active } from "../../utils/questions reducer/questions.action";
 
 const StartScreen = ({ numberOfQuestions, dispatch }) => {
   return (

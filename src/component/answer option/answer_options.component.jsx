@@ -1,4 +1,4 @@
-import { newAnswer } from "../../utils/questions/questions.action";
+import { newAnswer } from "../../utils/questions reducer/questions.action";
 
 const AnswerOption = ({ question, dispatch, answer }) => {
   const hasAnswered = answer !== null;

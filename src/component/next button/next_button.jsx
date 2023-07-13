@@ -1,4 +1,7 @@
-import { nextQuestion, finished } from "../../utils/questions/questions.action";
+import {
+  nextQuestion,
+  finished,
+} from "../../utils/questions reducer/questions.action";
 
 const NextButton = ({
   dispatch,

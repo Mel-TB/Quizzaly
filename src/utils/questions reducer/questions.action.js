@@ -8,12 +8,13 @@ export const dataFailed = (status) => {
   return { type: QUESTION_ACTION_TYPE.DATA_FAILED, payload: status };
 };
 
-export const active = (status) => {
-  return { type: QUESTION_ACTION_TYPE.ACTIVE, payload: status };
-};
-
-export const finished = (status) => {
-  return { type: QUESTION_ACTION_TYPE.FINISHED, payload: status };
+export const active = (status, secondsRemaining, questions) => {
+  return {
+    type: QUESTION_ACTION_TYPE.ACTIVE,
+    payload: status,
+    secondsRemaining,
+    questions,
+  };
 };
 
 export const newAnswer = (answer, points) => {
@@ -28,6 +29,10 @@ export const nextQuestion = (currentQuestion, answer) => {
   };
 };
 
+export const finished = (status) => {
+  return { type: QUESTION_ACTION_TYPE.FINISHED, payload: status };
+};
+
 export const restart = (currentQuestion, points, status, answer, highscore) => {
   return {
     type: QUESTION_ACTION_TYPE.RESTART,
@@ -36,5 +41,13 @@ export const restart = (currentQuestion, points, status, answer, highscore) => {
     status,
     answer,
     highscore,
+  };
+};
+
+export const timer = (secondsRemaining, status) => {
+  return {
+    type: QUESTION_ACTION_TYPE.TIMER,
+    payload: secondsRemaining,
+    status,
   };
 };
